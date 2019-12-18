@@ -1,0 +1,30 @@
+﻿<Page
+    x:Class="CBExample2.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CBExample2"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <local:ComboBoxItemConvert x:Key="ComboBoxItemConvert" Options="{x:Bind ComboBoxOptions}" ComboBoxEditText="{x:Bind EditText,Mode=OneWay}"/>
+    </Page.Resources>
+    
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel>
+            <ComboBox Name="ComboBox"
+                      DisplayMemberPath="ComboBoxHumanReadableOption"
+                      Header="ComboBox"
+                      IsEditable="True"
+                      Text="{x:Bind EditText,Mode=TwoWay}"
+                      IsTextSearchEnabled="True"
+                      ItemsSource="{x:Bind ComboBoxOptions}"
+                      SelectedValue="{x:Bind SelectedComboBoxOption, Mode=TwoWay, Converter={StaticResource ComboBoxItemConvert}}"
+                      SelectedValuePath="ComboBoxOption" />
+            <TextBlock Name="BoundTextblock" Text="{x:Bind SelectedComboBoxOption.ComboBoxHumanReadableOption, Mode=TwoWay}" />
+            <Button Click="Button_Click" Content="click" />
+        </StackPanel>
+    </Grid>
+</Page>
